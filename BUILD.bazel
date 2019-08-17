@@ -1,0 +1,30 @@
+load("@io_bazel_rules_go//go:def.bzl", "go_library", "go_test")
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/team-spectre/go-bigarray
+gazelle(name = "gazelle")
+
+go_library(
+    name = "go_default_library",
+    srcs = [
+        "file.go",
+        "foreach.go",
+        "inmem16.go",
+        "inmem32.go",
+        "inmem64.go",
+        "inmem8.go",
+        "inmem_iter.go",
+        "interface.go",
+        "ondisk.go",
+        "options.go",
+        "util.go",
+    ],
+    importpath = "github.com/team-spectre/go-bigarray",
+    visibility = ["//visibility:public"],
+)
+
+go_test(
+    name = "go_default_test",
+    srcs = ["module_test.go"],
+    embed = [":go_default_library"],
+)
